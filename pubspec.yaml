@@ -1,0 +1,35 @@
+name: takrorlash
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  just_audio: ^0.9.46
+  lottie: ^3.3.1
+  google_fonts: ^6.2.1
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+     - assets/json/data.json # json file
+     - assets/images/images_card/  #img
+     - assets/images/ #img
+     - assets/animation/splash_pages.json #splash pages animation
+     - assets/animation/
+     - assets/sound/
