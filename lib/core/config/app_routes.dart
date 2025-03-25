@@ -9,11 +9,18 @@ sealed class AppRoutes{
   static const gamePage ="gamePage";
   static const splashPage ="splashPage";
   static const resultPage ="resultPage";
-//
-//   static  Map<String, Widget Function(BuildContext)>appRoutes={
-//   home:(context)=>HomePage(items: []),
-//   gamePage:(context)=>GamePage(items: <PictureCharade>[]),
-//     splashPage:(context)=>SplashPage(),
-//     resultPage:(context)=>ResultPage(correct: 0, wrong: 0)
-// };
+
+  static  Map<String, Widget Function(BuildContext)>appRoutes={
+  home:(context)=>HomePage(items: []),
+  gamePage:(context)=>GamePage(items: <PictureCharade>[]),
+    splashPage:(context)=>SplashPage(),
+    resultPage:(context)=>ResultPage(correct: 0, wrong: 0)
+};
+
+
+  static void back(BuildContext context) {
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
+  }
 }

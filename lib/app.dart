@@ -12,7 +12,7 @@ class PictureCharadeApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SplashPage(),
       initialRoute: AppRoutes.splashPage,
-     // routes: AppRoutes.appRoutes,
+      routes: AppRoutes.appRoutes,
     );
   }
 }

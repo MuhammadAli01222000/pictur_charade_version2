@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:takrorlash/core/config/app_routes.dart';
 import 'package:takrorlash/core/theme/dimens.dart';
+import 'package:takrorlash/core/widgets/dialog.dart';
 
 import '../core/theme/colors.dart';
 import '../core/theme/icons.dart';
@@ -28,84 +30,141 @@ class _GamePageState extends State<GamePage> {
   void initState() {
     super.initState();
 
-    // 🔍 Log maqsadida tekshiramiz
-    debugPrint("GamePage: widget.items uzunligi - ${widget.items.length} ta element");
+     debugPrint(
+      "GamePage: widget.items uzunligi - ${widget.items.length} ta element",
+    );
 
     if (widget.items.isEmpty) {
       debugPrint("⚠️ Xatolik: widget.items bo'sh bo'lib keldi!");
     } else {
-      items = widget.items; // Faqat bo'sh bo'lmasa, saqlaymiz
+      items = widget.items;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final controller = ScrollController();
 
     return Scaffold(
       appBar: _buildAppBar(coins: coins, level: level),
-      body: widget.items.isEmpty
-          ? Center(child: Text("No items available"))
-          : ListView.builder(
-        controller: controller,
-        itemCount: widget.items.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              _light_button(),
-              Text("${widget.items.length} ITEMS"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 200,
-                    height: 310,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: 200,
-                          height: 250,
-                          child: Card(
-                            child: Image.asset(widget.items[index].left.imageUrl),
+      body:
+          widget.items.isEmpty
+              ? Center(child: Text("No items available"))
+              : ListView.builder(
+                controller: controller,
+                itemCount: widget.items.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      _light_button(),
+                      Text("${widget.items.length} ITEMS"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 200,
+                            height: 310,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: 200,
+                                  height: 250,
+                                  child: Card(
+                                    child: Image.asset(
+                                      widget.items[1].left.imageUrl,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 200,
+                                  height: 50,
+                                  child: Card(
+                                    color: Color(
+                                      widget.items[index].left.color,
+                                    ),
+                                    child: Expanded(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          for (
+                                            var i = 0;
+                                            i < widget.items[index].left.fill;
+                                          )
+                                            SizedBox(
+                                              width: 8,
+                                              height: 5,
+                                              child: Card(
+                                                color: AppColors.white,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 200,height: 50,child: Card(color:Color(widget.items[index].left.color),child: Expanded(child: Row(mainAxisSize: MainAxisSize.min,children: [
-                          for (var i=0 ;i<widget.items[index].right.fill;) SizedBox(width: 8,height: 5,child: Card(color: AppColors.white,),),],)),),)
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  Container(
-                    width: 200,
-                    height: 310,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: 200,
-                          height: 250,
-                          child: Card(
-                            child: Image.asset(widget.items[index].right.imageUrl),
+                          SizedBox(width: 10),
+                          Container(
+                            width: 200,
+                            height: 310,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: 200,
+                                  height: 250,
+                                  child: Card(
+                                    child: Image.asset(
+                                      widget.items[index].right.imageUrl,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 200,
+                                  height: 50,
+                                  child: Card(
+                                    color: Color(
+                                      widget.items[index].right.color,
+                                    ),
+                                    child: Expanded(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          for (
+                                            var i = 0;
+                                            i < widget.items[index].right.fill;
+                                          )
+                                            SizedBox(
+                                              width: 8,
+                                              height: 5,
+                                              child: Card(
+                                                color: AppColors.white,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 200,height: 50,child: Card(color:Color(widget.items[index].right.color),child: Expanded(child: Row(mainAxisSize: MainAxisSize.min,children: [
-                          for (var i=0 ;i<widget.items[index].right.fill;) SizedBox(width: 8,height: 5,child: Card(color: AppColors.white,),),],)),),)
-                      ],
-                    ),
-                  ),
-                ],
+                        ],
+                      ),
+                    ],
+                  );
+                },
               ),
-            ],
-          );
-        },
-      ),
     );
   }
 
-
- //app Bar
+  //app Bar + dialog qoshildi
   AppBar _buildAppBar({required int coins, required int level}) {
     return AppBar(
       backgroundColor: Colors.white70,
+      leading: IconButton(onPressed: (){CustomDialog.myDialog(context);}, icon: AppIcons.back),
       elevation: 0,
       title: Row(
         children: [

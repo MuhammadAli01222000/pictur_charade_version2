@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:takrorlash/core/theme/dimens.dart';
 
@@ -27,11 +28,11 @@ class _SplashPageState extends State<SplashPage> {
   void initialize() async {
     final controller = AppController();
     final items = await controller.readData();
-    for (var i = 0; i < AppDimens.d5; i++) {
-      await Future.delayed(Duration(seconds: 1));
+    for (int i = 0; i <=5; i++) {
+      await Future.delayed(Duration(milliseconds: 100));
     }
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => GamePage(items: items)),);
+      MaterialPageRoute(builder: (_) => HomePage(items: items)),);
   }
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,13 @@ class _SplashPageState extends State<SplashPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(child: Lottie.asset(splash_animation,width: AppDimens.d300,height: AppDimens.d600),),
+    //     Center(child: Text("Loading",style: GoogleFonts.museoModerno(color: Colors.white),),),
+          Center(
+            child: SizedBox(
+            width: AppDimens.d300,height: AppDimens.d600,
+                child: Lottie.asset(splash_animation),
+            ),
+          ),
 
         ],
       ),

@@ -28,7 +28,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _audioPlayer = AudioPlayer();
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+//gamePlay();
+}
   void music() {
     _playSoundWrong(_audioPlayer);
   }
@@ -58,6 +63,11 @@ class _HomePageState extends State<HomePage> {
   void pause() {
     _audioPlayer.pause();
   }
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +95,8 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Spacer(),
-                    Text("Current Level: 1"),
-                    Text("${widget.items}"),
+                    //Text("Current Level: 1"),
+             //     Text("${widget.items}"),
                     SizedBox(height: 10),
                     Container(
                       decoration: BoxDecoration(
@@ -107,12 +117,21 @@ class _HomePageState extends State<HomePage> {
                           shadowColor: Colors.transparent,
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,MaterialPageRoute(builder: (context){
-                              return GamePage(items:widget.items);
-                          })
+                          print('push ');
+                          // Navigator.push(
+                          //   context,MaterialPageRoute(builder: (context){
+                          //     return GamePage(items:widget.items);
+                          // })
+                          //);
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.gamePage,
+                            arguments: widget.items,
                           );
+                          debugPrint("⚠️ Xatolik: items bo‘sh!");
 
+
+//Navigator.pop(context);
                         },
                         child: Text(
                           "Play current level",
@@ -139,7 +158,6 @@ class _HomePageState extends State<HomePage> {
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,
                         ),
-                        onPressed: () {
                           onPressed: () {
                             if (widget.items.isNotEmpty) {
                               Navigator.pushNamed(
@@ -150,8 +168,6 @@ class _HomePageState extends State<HomePage> {
                             } else {
                               debugPrint("Xatoli");
                             }
-                          };
-
                         },
                         child: Text("Play first level"),
                       ),
